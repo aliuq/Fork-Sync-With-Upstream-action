@@ -1,6 +1,6 @@
-name: 'Upstream Sync'
-author: 'Adam Ormsby (@aormsby)'
-description: 'Automatically updates a target branch with new commits from an upstream repo, great for forks or parallel projects'
+name: "Upstream Sync"
+author: "Adam Ormsby (@aormsby)"
+description: "Automatically updates a target branch with new commits from an upstream repo, great for forks or parallel projects"
 
 branding:
   icon: refresh-ccw
@@ -8,79 +8,84 @@ branding:
 
 inputs:
   target_sync_branch:
-    description: 'Branch receiving updates from the upstream repo, e.g. => main, master, prod'
+    description: "Branch receiving updates from the upstream repo, e.g. => main, master, prod"
     required: true
 
   target_repo_token:
-    description: 'Input for passing secrets.GITHUB_TOKEN when disabling persistent auth in the checkout step'
+    description: "Input for passing secrets.GITHUB_TOKEN when disabling persistent auth in the checkout step"
     required: true
 
+  target_repo_origin:
+    description: "Input for repository url origin, e.g. => github.com, gitlab.com"
+    required: false
+    default: "github.com"
+
   upstream_repo_access_token:
-    description: 'Token for accessing the remote repo through HTTPS authentication'
+    description: "Token for accessing the remote repo through HTTPS authentication"
     required: false
 
   upstream_sync_repo:
-    description: 'Upstream repository, e.g. => aormsby/Fork-Sync-With-Upstream-action'
+    description: "Upstream repository, e.g. => aormsby/Fork-Sync-With-Upstream-action"
     required: true
 
   upstream_sync_branch:
-    description: 'Branch to sync from, e.g. => main, master, dev'
+    description: "Branch to sync from, e.g. => main, master, dev"
     required: true
 
   target_branch_checkout_args:
     description: 'Any extra args to pass to `git checkout` on the source branch, e.g. --recurse-submodules :: default = ""'
     required: false
-    default: ''
+    default: ""
 
   git_log_format_args:
-    description: 'Args to print the list of new commits from upstream :: default = --pretty=oneline'
+    description: "Args to print the list of new commits from upstream :: default = --pretty=oneline"
     required: false
-    default: '--pretty=oneline'
+    default: "--pretty=oneline"
 
   upstream_pull_args:
     description: 'Git args passed when running `git pull` against the upstream repo, e.g. --ff-only or --tags :: default = ""'
     required: false
-    default: ''
+    default: ""
 
   target_branch_push_args:
     description: 'Git args passed when running `git push` to apply changes to the source repo, e.g. --force :: default = ""'
     required: false
-    default: ''
-  
+    default: ""
+
   git_config_user:
     description: 'Git user credentials for sigining commit, (set to "null" for no config)'
     required: true
-    default: 'GH Action - Upstream Sync'
+    default: "GH Action - Upstream Sync"
 
   git_config_email:
     description: 'Git email credentials for sigining commit (set to "null" for no config)'
     required: true
-    default: 'action@github.com'
-  
+    default: "action@github.com"
+
   git_config_pull_rebase:
     description: 'Git config for "pull.rebase" settings, usually recommend false for this action (set to "null" for no config)'
     required: true
-    default: 'false'
+    default: "false"
 
   test_mode:
     description: If set to 'true', runs verification test on all inputs and any testable actions that use them
     required: true
-    default: 'false'
-  
+    default: "false"
+
   host_domain:
-    description: 'Domain name to be used in upstream repo URL.'
+    description: "Domain name to be used in upstream repo URL."
     required: true
-    default: 'github.com'
+    default: "github.com"
 
   shallow_since:
-    description: 'Length of time used when fetching shallow repo data, should match how often you perform a sync'
+    description: "Length of time used when fetching shallow repo data, should match how often you perform a sync"
     required: true
-    default: '1 month ago'
+    default: "1 month ago"
 
 outputs:
   has_new_commits:
-    description: 'true when new commits were included in this sync'
+    description: "true when new commits were included in this sync"
 
 runs:
-  using: 'node20'
-  main: 'main.js'
+  using: "node20"
+  main: "main.js"
